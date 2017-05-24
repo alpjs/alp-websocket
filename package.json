@@ -30,17 +30,19 @@
     "clean": "rm -Rf docs dist test/node6 coverage",
     "lint": "eslint --ext .js,.jsx src/",
     "prepare": "ln -s ../../git-hooks/pre-commit .git/hooks/pre-commit 2>/dev/null || true ; ln -s ../../git-hooks/post-checkout .git/hooks/post-checkout 2>/dev/null || true ; ln -s ../../git-hooks/post-merge .git/hooks/post-merge 2>/dev/null || true ; ln -s ../../git-hooks/prepare-commit-msg .git/hooks/prepare-commit-msg 2>/dev/null || true",
-    "prepublish": "ln -s ../../git-hooks/pre-commit .git/hooks/pre-commit 2>/dev/null || true ; ln -s ../../git-hooks/post-checkout .git/hooks/post-checkout 2>/dev/null || true ; ln -s ../../git-hooks/post-merge .git/hooks/post-merge 2>/dev/null || true ; ln -s ../../git-hooks/prepare-commit-msg .git/hooks/prepare-commit-msg 2>/dev/null || true",
+    "prepublish": "npm run snyk-protect && ln -s ../../git-hooks/pre-commit .git/hooks/pre-commit 2>/dev/null || true ; ln -s ../../git-hooks/post-checkout .git/hooks/post-checkout 2>/dev/null || true ; ln -s ../../git-hooks/post-merge .git/hooks/post-merge 2>/dev/null || true ; ln -s ../../git-hooks/prepare-commit-msg .git/hooks/prepare-commit-msg 2>/dev/null || true",
     "preversion": "yarn run lint && yarn run build && pob-repository-check-clean",
     "release": "pob-repository-check-clean && pob-release",
     "version": "pob-version",
-    "watch": "pob-watch"
+    "watch": "pob-watch",
+    "snyk-protect": "snyk protect"
   },
   "dependencies": {
     "flow-runtime": "^0.10.0",
     "nightingale-logger": "^3.4.0",
-    "socket.io": "^1.7.3",
-    "socket.io-client": "^1.7.3"
+    "socket.io": "^2.0.0",
+    "socket.io-client": "^2.0.0",
+    "snyk": "^1.30.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -56,5 +58,6 @@
     "komet-karma": "^0.2.5",
     "pob-babel": "^17.3.0",
     "pob-release": "^3.1.0"
-  }
+  },
+  "snyk": true
 }
